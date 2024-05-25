@@ -77,6 +77,7 @@ app.post("/upload/trade", upload.single("file"), async (req, res) => {
 
 async function processTrades(data) {
   try {
+    await Trade.deleteMany({});
     await Trade.insertMany(data);
     const balancesCollection = database.collection(`balances`);
     await balancesCollection.deleteMany({});
